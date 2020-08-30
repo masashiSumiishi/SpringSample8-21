@@ -53,12 +53,11 @@ public class HomeController {
 
 	//ユーザー詳細画面
 	@GetMapping("/userDetail/{id:.+}")
-	public String getUserDetail(@ModelAttribute SignupForm form, Model model,
-			@PathVariable("id") String userId) {
+	public String getUserDetail(@ModelAttribute SignupForm form, Model model, @PathVariable("id") String userId) {
 		//ユーザーID確認
 		System.out.println("userId = " + userId);
 		//コンテンツ部分にユーザー詳細を表示するための文字列を登録
-		model.addAttribute("contents", "login/userDetail :: userDetail_contents");
+		model.addAttribute("contents", "login/userDetail::userDetail_contents");
 
 		radioMarriage = initRadioMarriage();
 		model.addAttribute("radioMarriage", radioMarriage);

@@ -40,7 +40,7 @@ public class UserDaoJdbcImpl implements UserDao{
 	@Override
 	public User selectOne(String userId) throws DataAccessException {
 		//1件登録
-		Map<String, Object> map = jdbc.queryForMap("SELECT * FROM m_user" + "WHERE user_id = ?"
+		Map<String, Object> map = jdbc.queryForMap("SELECT * FROM m_user" + " WHERE user_id = ?"
 				, userId);
 		User user = new User();
 		user.setUserId((String)map.get("user_id"));
@@ -76,7 +76,12 @@ public class UserDaoJdbcImpl implements UserDao{
 
 	@Override
 	public int updateOne(User user) throws DataAccessException {
-		return 0;
+		//1件更新
+		int rowNumber = jdbc.update("UPDATE m_user" + " SET" + " password = ?,"
+				+ " user_name = ?," + " birthday = ?," + " age = ?," + " marriage = ?"
+				+ " WHERE user_id = ?", user.getPassword(), user.getUserName(),
+				user.getBirthday(), user.getAge(), user.isMarriage(), user.getUserId());
+		return rowNumber;
 	}
 
 	@Override
