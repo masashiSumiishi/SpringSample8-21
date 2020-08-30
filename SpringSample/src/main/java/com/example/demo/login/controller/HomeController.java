@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.demo.login.domain.model.SignupForm;
 import com.example.demo.login.domain.model.User;
@@ -74,6 +75,30 @@ public class HomeController {
 			model.addAttribute("signupForm", form);
 		}
 		return "login/homeLayout";
+	}
+
+	//ユーザー更新用処理
+	@PostMapping(value="/userDetail", params="update")
+	public String postUserDetailUpdate(@ModelAttribute SignupForm form, Model model) {
+		System.out.println("更新ボタンの処理");
+		User user = new User();
+		user.setUserId(form.getUserId());
+		user.setPassword(form.getPassword());
+		user.setUserName(form.getUserName());
+		user.setBirthday(form.getBirthday());
+		user.setAge(form.getAge());
+		user.setMarriage(form.isMarriage());
+
+		boolean result = userService.updateOne(user);
+
+		if(result == true) {
+			model.addAttribute("result", "更新成功");
+		} else {
+			model.addAttribute("result", "更新失敗");
+		}
+
+		//ユーザー一覧画面を表示
+		return getUserList(model);
 	}
 
 	@GetMapping("/logout")
