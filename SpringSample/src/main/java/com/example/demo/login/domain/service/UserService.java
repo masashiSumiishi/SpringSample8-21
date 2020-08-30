@@ -33,4 +33,9 @@ public class UserService {
 	public List<User> selectMany() {
 		return dao.selectMany();
 	}
+
+	//1件取得
+	public User selectOne(String userId) {
+		return dao.selectOne(userId);
+	}
 }
