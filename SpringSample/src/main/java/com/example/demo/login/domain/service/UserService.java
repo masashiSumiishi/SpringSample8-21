@@ -48,4 +48,14 @@ public class UserService {
 		}
 		return result;
 	}
+
+	//1件削除メソッド
+	public boolean deleteOne(String userId) {
+		int rowNumber = dao.deleteOne(userId);
+		boolean result = false;
+		if (rowNumber > 0) {
+			result = true;
+		}
+		return result;
+	}
 }
