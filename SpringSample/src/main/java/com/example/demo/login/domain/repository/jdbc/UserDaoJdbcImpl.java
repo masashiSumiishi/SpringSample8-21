@@ -94,5 +94,10 @@ public class UserDaoJdbcImpl implements UserDao{
 	@Override
 	public void userCsvOut() throws DataAccessException {
 
+		//全件取得するSQL
+		String sql = "SELECT * FROM m_user";
+		UserRowCallbackHandler handler = new UserRowCallbackHandler();
+		//SQL実行＆CSV出力
+		jdbc.query(sql, handler);
 	}
 }
