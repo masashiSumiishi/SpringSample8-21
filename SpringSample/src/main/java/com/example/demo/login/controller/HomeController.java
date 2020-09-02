@@ -151,4 +151,12 @@ public class HomeController {
 	public String postLogout() {
 		return "redirect:/login";
 	}
+
+	//アドミン権限専用画面のGET用メソッド
+	@GetMapping("/admin")
+	public String getAdmin(Model model) {
+		//コンテンツ部分にユーザー詳細を表示するための登録
+		model.addAttribute("contents", "login/admin :: admin_contents");
+		return "login/homeLayout";
+	}
 }
