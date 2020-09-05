@@ -38,7 +38,7 @@ public class RestServiceJdbcImpl implements RestService {
 	//全件検索用メソッド
 	@Override
 	public List<User> selectMany() {
-		return null;
+		return dao.selectMany();
 	}
 
 	//1件更新用メソッド
@@ -55,6 +55,11 @@ public class RestServiceJdbcImpl implements RestService {
 	//1件削除用メソッド
 	@Override
 	public boolean delete(String userId) {
-		return false;
+		int result = dao.deleteOne(userId);
+		if (result == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }
