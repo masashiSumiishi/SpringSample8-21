@@ -44,7 +44,12 @@ public class RestServiceJdbcImpl implements RestService {
 	//1件更新用メソッド
 	@Override
 	public boolean update(User user) {
-		return false;
+		int result = dao.updateOne(user);
+		if (result == 0) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	//1件削除用メソッド
